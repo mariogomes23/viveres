@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Vivere extends Model
 {
@@ -13,9 +14,9 @@ class Vivere extends Model
 protected $fillable = ["tipo_id","marca","quantidade"];
 
 
-public function tipos()
+public function tipo()
 {
-    return $this->hasMany(Tipo::class);
+    return $this->hasOne(Tipo::class);
 }
 
 }

@@ -40,7 +40,16 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$user->name}}</span>
+                @if ( Auth::user())
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->name}}</span>
+
+                @else
+
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Usuario</span>
+
+
+                @endif
+
                 <img class="img-profile rounded-circle"
                     src="img/undraw_profile.svg">
             </a>

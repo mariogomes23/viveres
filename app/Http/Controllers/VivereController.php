@@ -22,9 +22,9 @@ class VivereController extends Controller
     {
         //
 
-        $tipo = Tipo::all();
-        $viveres = $this->viveres->with("tipos")->get();
-        return View("viveres.index",compact("viveres","tipo"));
+
+        $viveres = $this->viveres->all();
+        return View("viveres.index",compact("viveres"));
     }
 
     /**
