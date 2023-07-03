@@ -9,10 +9,18 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::resource("viveres",VivereController::class);
-Route::resource("tipo",TipoController::class);
-Route::resource("user",UserController::class);
-Route::get('/', [HomeController::class,"painel"])->name("painel");
+
+Route::middleware("auth")->group(function(){
+    Route::resource("viveres",VivereController::class);
+    Route::resource("tipo",TipoController::class);
+    Route::resource("user",UserController::class);
+    Route::get('/', [HomeController::class,"painel"])->name("painel");
+
+    Route::get("/relatorio",[HomeController::class,"relatorioSubmit"])->name("relatorio");
+
+
+});
+
 
 
 

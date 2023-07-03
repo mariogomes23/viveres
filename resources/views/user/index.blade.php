@@ -12,7 +12,7 @@
 
           @if (Session::has("message"))
           <div class="card-header mb-4">
-            <div class="alert alert-danger mb-2  " role="alert">
+            <div class="alert alert-success mb-2  " role="alert">
               {{ Session::get("message")}}
               </div>
 
@@ -43,6 +43,7 @@
                             <td>{{$p->role}}</td>
 
                             <td>
+
                                 <a class="btn btn-sm btn-warning" href="{{route("user.edit",$p->id)}}">Editar</a>
                                 <a class="btn btn-sm btn-info" href="{{route("user.show",$p->id)}}">Perfil</a>
                                 <form action="{{route("user.destroy",$p->id)}}" method="post" style="display:inline-flex;">
@@ -50,6 +51,10 @@
                                     @method("DELETE")
                                     <button class="btn btn-sm btn-danger" type="submit">apagar</button>
                                 </form>
+
+
+                    
+
                             </td>
                         </tr>
 

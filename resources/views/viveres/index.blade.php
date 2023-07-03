@@ -12,7 +12,7 @@
 
           @if (Session::has("message"))
           <div class="card-header mb-4">
-            <div class="alert alert-danger mb-2  " role="alert">
+            <div class="alert alert-success mb-2  " role="alert">
               {{ Session::get("message")}}
               </div>
 
@@ -43,13 +43,23 @@
                             <td>{{$p->created_at}}</td>
 
                             <td>
-                                <a class="btn btn-sm btn-warning" href="{{route("viveres.edit",$p->id)}}">Editar</a>
-                                <a class="btn btn-sm btn-info" href="{{route("viveres.show",$p->id)}}">Perfil</a>
-                                <form action="{{route("viveres.destroy",$p->id)}}" method="post" style="display:inline-flex;">
-                                  @csrf
-                                    @method("DELETE")
-                                    <button class="btn btn-sm btn-danger" type="submit">apagar</button>
-                                </form>
+
+
+                    @can("isFornecedor")
+                    <a class="btn btn-sm btn-warning" href="{{route("viveres.edit",$p->id)}}">Editar</a>
+
+                    @endcan
+                              <a class="btn btn-sm btn-info" href="{{route("viveres.show",$p->id)}}">Perfil</a>
+
+
+                              @can("isAdmin")
+                              <form action="{{route("viveres.destroy",$p->id)}}" method="post" style="display:inline-flex;">
+                                @csrf
+                                  @method("DELETE")
+                                  <button class="btn btn-sm btn-danger" type="submit">apagar</button>
+                              </form>
+
+                              @endcan
                             </td>
                         </tr>
 

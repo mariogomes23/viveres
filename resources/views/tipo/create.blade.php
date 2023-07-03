@@ -6,13 +6,13 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Adicionar Usuario</h1>
+    <h1 class="h3 mb-2 text-gray-800">Adicionar Tipo de Viveres</h1>
 
     <div class="card shadow mb-4">
 
           @if (Session::has("message"))
           <div class="card-header mb-4">
-            <div class="alert alert-danger mb-2  " role="alert">
+            <div class="alert alert-success mb-2  " role="alert">
               {{ Session::get("message")}}
               </div>
 

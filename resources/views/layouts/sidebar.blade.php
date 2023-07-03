@@ -23,7 +23,8 @@
 
 
 
-    <!-- Nav Item - Pages Collapse Menu -->
+
+
     <li class="nav-item">
         <a class="nav-link collapsed" href="{{route("user.index")}}" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
@@ -33,29 +34,51 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Usuario</h6>
-                <a class="collapse-item" href="{{route("user.create")}}">Adicionar Usuario</a>
-                <a class="collapse-item" href="{{route("user.index")}}">Lista de Usuario</a>
+
+          @can("isAdmin")
+
+          <a class="collapse-item" href="{{route("user.create")}}">Adicionar Usuario</a>
+          <a class="collapse-item" href="{{route("user.index")}}">Lista de Usuario</a>
+
+          @endcan
+
+
+
+
             </div>
         </div>
     </li>
+
+
+
+
+    <!-- Nav Item - Pages Collapse Menu -->
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="{{route("viveres.index")}}" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="{{route("viveres.index")}}" data-toggle="collapse" data-target="#collapseUtilities"
+        aria-expanded="true" aria-controls="collapseUtilities">
 
-            <span>Viveres</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Viveres</h6>
-                <a class="collapse-item" href="{{route("viveres.create")}}">Adicionar Viveres</a>
-                <a class="collapse-item" href="{{route("viveres.index")}}">Lista de Viveres</a>
+        <span>Viveres</span>
+    </a>
+    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+        data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Viveres</h6>
+          @can("isFornecedor")
+          <a class="collapse-item" href="{{route("viveres.create")}}">Adicionar Viveres</a>
 
-            </div>
+          @endcan
+
+          
+
+            <a class="collapse-item" href="{{route("viveres.index")}}">Lista de Viveres</a>
+
         </div>
-    </li>
+    </div>
+</li>
+
+
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="{{route("tipo.index")}}" data-toggle="collapse" data-target="#collapseUtilities"
@@ -67,14 +90,17 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Tipo de Viveres</h6>
-                <a class="collapse-item" href="{{route("tipo.create")}}">Adicionar Tipo de  Viveres</a>
+              @can("isFornecedor")
+              <a class="collapse-item" href="{{route("tipo.create")}}">Adicionar Tipo de  Viveres</a>
+
+              @endcan
                 <a class="collapse-item" href="{{route("tipo.index")}}">Lista de Tipo de  Viveres</a>
 
             </div>
         </div>
     </li>
 
-    
+
 
 
 </ul>

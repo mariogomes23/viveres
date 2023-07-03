@@ -12,7 +12,7 @@
 
           @if (Session::has("message"))
           <div class="card-header mb-4">
-            <div class="alert alert-danger mb-2  " role="alert">
+            <div class="alert alert-success mb-2  " role="alert">
               {{ Session::get("message")}}
               </div>
 
