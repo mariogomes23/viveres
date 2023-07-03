@@ -57,6 +57,7 @@
 
                     </tbody>
                 </table>
+                {{$tipo->links()}}
             </div>
         </div>
     </div>

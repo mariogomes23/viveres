@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Vivere extends Model
 {
@@ -14,9 +15,10 @@ class Vivere extends Model
 protected $fillable = ["tipo_id","marca","quantidade"];
 
 
-public function tipo()
+
+public function tipo():BelongsTo
 {
-    return $this->hasOne(Tipo::class);
+    return $this->belongsTo(Tipo::class);
 }
 
 }

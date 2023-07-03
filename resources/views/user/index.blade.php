@@ -60,7 +60,9 @@
 
 
                     </tbody>
+
                 </table>
+                {{$user->links()}}
             </div>
         </div>
     </div>

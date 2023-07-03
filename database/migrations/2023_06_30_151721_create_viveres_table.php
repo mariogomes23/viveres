@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('viveres', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("tipo_id")->constrained();
+            $table->foreignId("tipo_id")->constrained()->onDelete("cascade")->onUpdate("cascade");
             $table->string("marca")->unique();
             $table->string("quantidade");
             $table->timestamps();

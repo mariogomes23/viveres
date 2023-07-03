@@ -23,7 +23,7 @@ class VivereController extends Controller
         //
 
 
-        $viveres = $this->viveres->all();
+        $viveres = $this->viveres->orderBy("marca","desc")->paginate(5);
         return View("viveres.index",compact("viveres"));
     }
 
@@ -53,16 +53,8 @@ class VivereController extends Controller
 
 
         ]);
-        $this->viveres->tipos()->create([
-
-            "tipo_id"=>$request->tipo_id,
-            "marca"=>$request->marca,
-            "quantidade"=>$request->quantidade
-
-
-
-        ]);
-        return redirect()->route("tipo.index")->with("message","adicionado com successo");
+        $this->viveres->with("tipo")->create($request->all());
+        return redirect()->route("viveres.index")->with("message","adicionado com successo");
 
     }
 
@@ -84,13 +76,13 @@ class VivereController extends Controller
     {
          $tipo = Tipo::all();
         $viveres = $this->viveres->find($id);
-        return View("viveres.edit",compact("viveres"));
+        return View("viveres.edit",compact("viveres","tipo"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,$id)
     {
         //
         $request->validate([
@@ -101,16 +93,8 @@ class VivereController extends Controller
 
 
         ]);
-        $this->viveres->with("tipos")->find($id)->update([
-
-            "tipo_id"=>$request->tipo_id,
-            "marca"=>$request->marca,
-            "quantidade"=>$request->quantidade
-
-
-
-        ]);
-        return redirect()->route("tipo.index")->with("message","atualizado com successo");
+        $this->viveres->find($id)->update($request->all());
+        return redirect()->route("viveres.index")->with("message","atualizado com successo");
     }
 
     /**

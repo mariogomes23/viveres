@@ -58,9 +58,9 @@
 
                         @endforelse
 
-
                     </tbody>
                 </table>
+                {{$viveres->links()}}
             </div>
         </div>
     </div>

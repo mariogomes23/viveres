@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         //
 
-        $user = $this->user->all();
+        $user = $this->user->orderBy("created_at","desc")->paginate(5);
         return View("user.index",compact("user"));
     }
 
@@ -32,8 +32,37 @@ class UserController extends Controller
     public function create()
     {
         //
+
+        $roles =
+         [
+            "fornecedor",
+            "oficial_logistico",
+            "chefe_logistico",
+            "admin"
+         ];
+
+         $patentes =
+         [
+            "segundo_cabo",
+            "primeiro_cabo",
+            "segundo_sargento",
+            "primeiro_sargento",
+            "sargento_adjudante",
+            "sargento_chefe",
+            "aspirante",
+            "segundo_tenente",
+            "primeiro_tenente",
+            "capitao",
+            "major",
+            "tenente_coronel",
+            "coronel",
+            "major_general",
+            "tenente_general",
+            "general"
+
+         ];
         $user = $this->user->all();
-        return View("user.create",compact("user"));
+        return View("user.create",compact("user","roles","patentes"));
     }
 
     /**
@@ -48,17 +77,36 @@ class UserController extends Controller
             "email"=>["required","string","email"],
             "password"=>["required","min:8"],
             "patente"=>["required"],
+            "role"=>["required"]
 
         ]);
-        $this->user->create([
-            "name"=>$request->name,
-            "email"=>$request->name,
-            "password"=>Hash::make($request->password),
-            "patente"=>$request->patente,
-            "role"=>"oficial_logistico"
+
+        if($request->input("role"))
+        {
+            $this->user->create([
+                "name"=>$request->name,
+                "email"=>$request->name,
+                "password"=>Hash::make($request->password),
+                "patente"=>$request->patente,
+                "role"=>$request->role
 
 
-        ]);
+            ]);
+
+        }
+        else
+        {
+            $this->user->create([
+                "name"=>$request->name,
+                "email"=>$request->name,
+                "password"=>Hash::make($request->password),
+                "patente"=>$request->patente,
+                "role"=>"oficial_logistico"
+
+
+            ]);
+
+        }
         return redirect()->route("user.index")->with("message","adicionado com successo");
 
     }
@@ -68,6 +116,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
+
         //
         $user = $this->user->find($id);
         return View("user.show",compact("user"));
@@ -78,9 +127,37 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
+        $roles =
+        [
+           "fornecedor",
+           "oficial_logistico",
+           "chefe_logistico",
+           "admin"
+        ];
+
+        $patentes =
+        [
+           "segundo_cabo",
+           "primeiro_cabo",
+           "segundo_sargento",
+           "primeiro_sargento",
+           "sargento_adjudante",
+           "sargento_chefe",
+           "aspirante",
+           "segundo_tenente",
+           "primeiro_tenente",
+           "capitao",
+           "major",
+           "tenente_coronel",
+           "coronel",
+           "major_general",
+           "tenente_general",
+           "general"
+
+        ];
         //
         $user = $this->user->find($id);
-        return View("user.edit",compact("user"));
+        return View("user.edit",compact("user","roles","patentes"));
     }
 
     /**

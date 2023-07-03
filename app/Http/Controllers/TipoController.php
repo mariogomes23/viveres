@@ -22,7 +22,7 @@ class TipoController extends Controller
     {
         //
 
-        $tipo = $this->tipo->all();
+        $tipo = $this->tipo->orderBy("nome","desc")->paginate(5);
         return View("tipo.index",compact("tipo"));
     }
 
