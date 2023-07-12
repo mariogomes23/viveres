@@ -12,4 +12,23 @@ class Role extends Model
         'nome',
 
     ];
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function permission()
+    {
+        return $this->belongsToMany(Permission::class);
+
+    }
+
+    public function hasPermission($nome)
+    {
+      return  $this->permission()->where("nome",$nome);
+
+    }
+
+
 }

@@ -13,4 +13,14 @@ class Permission extends Model
         'nome',
 
     ];
+
+    public function roles()
+    {
+        return $this->belongsTo(Role::class);
+
+    }
+
+
+
+
 }
