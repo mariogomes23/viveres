@@ -16,39 +16,37 @@ class UserSeeder extends Seeder
     {
         //
 
-        User::insert([
+        User::create(
             [
                 "name"=>"admin",
                 "email"=>"admin@admin",
                 "password"=>Hash::make(12345678),
-                "role"=>"admin",
+                "role_id"=>1,
                 "patente"=>"segundo_sargento",
 
-            ],
-            [
-                "name"=>"mario oficial logistico",
-                "email"=>"oficial@logistico",
-                "password"=>Hash::make(12345678),
-                "role"=>"oficial_logistico",
-                "patente"=>"segundo_sargento",
-            ],
-            [
-                "name"=>"fornecedor",
-                "email"=>"fornecedor@fornecedor",
-                "password"=>Hash::make(12345678),
-                "role"=>"fornecedor",
-                "patente"=>"segundo_sargento",
-            ],
-            [
-                "name"=>"chefe_logistico",
-                "email"=>"chefelogistico@chefelogistico",
-                "password"=>Hash::make(12345678),
-                "role"=>"chefe_logistico",
-                "patente"=>"segundo_sargento",
             ]
-        ]
-
 
     );
+
+
+    User::create([
+
+
+            "name"=>"mario oficial logistico",
+            "email"=>"oficial@logistico",
+            "password"=>Hash::make(12345678),
+            "role_id"=>3,
+            "patente"=>"segundo_sargento",
+        
+    ]);
+
+    User::create([
+        "name"=>"chefe_logistico",
+        "email"=>"chefelogistico@chefelogistico",
+        "password"=>Hash::make(12345678),
+        "role_id"=>2,
+        "patente"=>"segundo_sargento",
+
+    ]);
     }
 }
