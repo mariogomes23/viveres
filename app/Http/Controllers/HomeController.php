@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
+use App\Models\Role;
 use App\Models\Tipo;
 use App\Models\User;
 use App\Models\Vivere;
@@ -17,8 +19,10 @@ class HomeController extends Controller
     {
         $tipo = Tipo::all();
         $viveres = Vivere::all();
+        $roles = Role::all();
+        $permissions = Permission::all();
         $user = Auth::user();
-        return View("painel",compact("tipo","viveres","user"));
+        return View("painel",compact("tipo","viveres","user","roles","permissions"));
     }
 
     public function relatorioSubmit()

@@ -35,12 +35,11 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Usuario</h6>
 
-          @can("isAdmin")
+
 
           <a class="collapse-item" href="{{route("user.create")}}">Adicionar Usuario</a>
           <a class="collapse-item" href="{{route("user.index")}}">Lista de Usuario</a>
 
-          @endcan
 
 
 
@@ -48,6 +47,57 @@
             </div>
         </div>
     </li>
+
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route("permission.index")}}" data-toggle="collapse" data-target="#collapseTwo"
+            aria-expanded="true" aria-controls="collapseTwo">
+
+            <span>Permissões</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Permissões</h6>
+
+
+
+          <a class="collapse-item" href="{{route("permission.create")}}">Adicionar Permissão</a>
+          <a class="collapse-item" href="{{route("permission.index")}}">Lista de Permissões</a>
+
+
+
+
+
+            </div>
+        </div>
+    </li>
+
+
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route("role.index")}}" data-toggle="collapse" data-target="#collapseTwo"
+            aria-expanded="true" aria-controls="collapseTwo">
+
+            <span>Tipo de Usuarios</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Tipo de Usuarios</h6>
+
+
+
+          <a class="collapse-item" href="{{route("role.create")}}">Adicionar Tipo de Usuario</a>
+          <a class="collapse-item" href="{{route("role.index")}}">Lista de Tipo de  Usuario</a>
+
+
+
+
+
+            </div>
+        </div>
+    </li>
+
+
 
 
 
@@ -70,7 +120,7 @@
 
           @endcan
 
-          
+
 
             <a class="collapse-item" href="{{route("viveres.index")}}">Lista de Viveres</a>
 
