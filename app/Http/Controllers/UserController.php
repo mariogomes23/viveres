@@ -23,6 +23,8 @@ class UserController extends Controller
     {
         //
 
+        $this->authorize("delete_user",User::class);
+
         $user = $this->user->with("role")->orderBy("created_at","desc")->paginate(5);
         return View("user.index",compact("user"));
     }
@@ -66,6 +68,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        $this->authorize("create_user",User::class);
 
         $request->validate([
             "name"=>["required","string"],
@@ -99,6 +102,8 @@ class UserController extends Controller
     {
 
         //
+
+        $this->authorize("create_user",User::class);
         $role = Role::all();
         $user = $this->user->find($id);
         return View("user.show",compact("user","role"));
@@ -142,6 +147,7 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $this->authorize("edit_user",User::class);
         $request->validate([
             "name"=>["required","string"],
             "email"=>["required","string","email"],
@@ -168,6 +174,7 @@ class UserController extends Controller
     {
         //
 
+        $this->authorize("delete_user",User::class);
         $this->user->destroy($id);
 
         return redirect()->route("user.index")->with("message","apagado com successo");

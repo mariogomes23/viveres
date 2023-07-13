@@ -22,6 +22,8 @@ class TipoController extends Controller
     {
         //
 
+        $this->authorize("index_tipoViveres",Tipo::class);
+
         $tipo = $this->tipo->orderBy("nome","desc")->paginate(5);
         return View("tipo.index",compact("tipo"));
     }
@@ -43,6 +45,7 @@ class TipoController extends Controller
     {
         //
 
+        $this->authorize("create_tipoViveres",Tipo::class);
         $request->validate([
             "nome"=>["required","string"],
 
@@ -64,6 +67,7 @@ class TipoController extends Controller
     public function show(string $id)
     {
         //
+        $this->authorize("index_tipoViveres",Tipo::class);
         $tipo = $this->tipo->find($id);
         return View("tipo.show",compact("tipo"));
     }
@@ -84,6 +88,7 @@ class TipoController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $this->authorize("edit_tipoViveres",Tipo::class);
         $request->validate([
             "nome"=>["required","string"],
 
@@ -104,6 +109,7 @@ class TipoController extends Controller
     public function destroy(string $id)
     {
         //
+        $this->authorize("delete_tipoViveres",Tipo::class);
 
         $this->tipo->destroy($id);
 

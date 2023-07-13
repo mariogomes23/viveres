@@ -23,6 +23,7 @@ class VivereController extends Controller
         //
 
 
+        $this->authorize("index_viveres",Vivere::class);
         $viveres = $this->viveres->orderBy("marca","desc")->paginate(5);
         return View("viveres.index",compact("viveres"));
     }
@@ -66,6 +67,8 @@ class VivereController extends Controller
     public function show(string $id)
     {
         //
+
+        $this->authorize("index_viveres",Vivere::class);
         $tipo = Tipo::all();
         $viveres = $this->viveres->find($id);
         return View("viveres.show",compact("viveres"));
@@ -76,6 +79,8 @@ class VivereController extends Controller
      */
     public function edit(string $id)
     {
+
+
          $tipo = Tipo::all();
         $viveres = $this->viveres->find($id);
         return View("viveres.edit",compact("viveres","tipo"));
@@ -87,6 +92,7 @@ class VivereController extends Controller
     public function update(Request $request,$id)
     {
         //
+        $this->authorize("edit_viveres",Vivere::class);
         $request->validate([
 
             "quantidade"=>["required","min:0","integer"],
@@ -105,6 +111,8 @@ class VivereController extends Controller
     public function destroy(string $id)
     {
         //
+
+        $this->authorize("delete_viveres",Vivere::class);
 
         $this->viveres->destroy($id);
 

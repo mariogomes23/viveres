@@ -24,6 +24,8 @@ class RoleController extends Controller
     {
         //
 
+        $this->authorize("index_tipoUsuario",Role::class);
+
         $role = $this->role->with("permissions")->orderBy("nome","desc")->paginate(5);
 
 
@@ -47,6 +49,7 @@ class RoleController extends Controller
     {
         //
 
+        $this->authorize("create_tipoUsuario",Role::class);
         $request->validate([
             "nome"=>["required","string"],
 
@@ -68,6 +71,7 @@ class RoleController extends Controller
     public function show(string $id)
     {
         //
+        $this->authorize("index_tipoUsuario",Role::class);
         $role = $this->role->with("permissions")->find($id);
         return View("role.show",compact("role"));
     }
@@ -90,6 +94,7 @@ class RoleController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $this->authorize("edit_tipoUsuario",Role::class);
         $request->validate([
             "nome"=>["required","string"],
 
@@ -110,11 +115,14 @@ class RoleController extends Controller
     public function destroy(string $id)
     {
         //
+        $this->authorize("delete_tipoUsuario",Role::class);
 
         $this->role->destroy($id);
 
         return redirect()->route("role.index")->with("message","apagado com successo");
     }
+
+    
     public function adicionarPermissionInRole($id,Request $request)
     {
         $role = $this->role->find($id);
