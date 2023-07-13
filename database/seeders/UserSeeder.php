@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
@@ -37,7 +38,7 @@ class UserSeeder extends Seeder
             "password"=>Hash::make(12345678),
             "role_id"=>3,
             "patente"=>"segundo_sargento",
-        
+
     ]);
 
     User::create([
@@ -48,5 +49,20 @@ class UserSeeder extends Seeder
         "patente"=>"segundo_sargento",
 
     ]);
+
+
+
+    $roleID = 1;
+    $permissionIDs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+
+    $records = collect($permissionIDs)->map(function ($permissionID) use ($roleID) {
+        return [
+            'role_id' => $roleID,
+            'permission_id' => $permissionID,
+        ];
+    });
+
+    DB::table('permission_role')->insert($records->toArray());
+
     }
 }

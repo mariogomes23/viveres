@@ -59,10 +59,10 @@
 
                         <div class="form-group">
                             <label for="role">TIpo de usuário</label>
-                            <select class="form-control @error('role') is-invalid @enderror" id="role" name="role">
+                            <select class="form-control @error('role_id') is-invalid @enderror" id="role" name="role_id">
                                 <option value="">Selecione</option>
-                                @foreach ($roles as $p )
-                                <option value="{{$p}}" {{ old('role') == $p ? 'selected' : '' }}>{{$p}}</option>
+                                @foreach ($role as $p )
+                                <option value="{{$p->id}}" {{ old('role_id') == $p ? 'selected' : '' }}>{{$p->nome}}</option>
                                 @endforeach
 
                             </select>

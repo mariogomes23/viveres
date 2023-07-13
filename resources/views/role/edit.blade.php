@@ -20,7 +20,7 @@
 
           @endif
 
-        <div class="card-body mt-2">
+        <div class="card-body mt-2 mb-10">
             <div class="table-responsive">
                 <div class="container-fluid">
                     <form action="{{route("role.update",$role->id)}}" method="POST">
@@ -38,6 +38,58 @@
 
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </form>
+
+
+
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="card-body mt-10">
+            <div class="table-responsive">
+                <div class="container-fluid">
+                    <form action="{{route("adicionarPermissionInRole",$role->id)}}" method="POST">
+                        @csrf
+                        @method("POST")
+                        <div class="form-group">
+                            <label for="name">Selecione a Permissão</label>
+
+
+                            @foreach ($permissions as $permission)
+                            <div>
+                                <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"
+                                       {{ $role->permissions->contains($permission->id) ? 'checked' : '' }}>
+                                <label>{{ $permission->nome }}</label>
+                            </div>
+                        @endforeach
+
+                        </div>
+
+
+
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </form>
+
+
+
+
+
                 </div>
 
 

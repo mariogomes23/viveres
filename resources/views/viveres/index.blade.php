@@ -45,21 +45,19 @@
                             <td>
 
 
-                    @can("isFornecedor")
                     <a class="btn btn-sm btn-warning" href="{{route("viveres.edit",$p->id)}}">Editar</a>
 
-                    @endcan
+
                               <a class="btn btn-sm btn-info" href="{{route("viveres.show",$p->id)}}">Perfil</a>
 
 
-                              @can("isAdmin")
+
                               <form action="{{route("viveres.destroy",$p->id)}}" method="post" style="display:inline-flex;">
                                 @csrf
                                   @method("DELETE")
                                   <button class="btn btn-sm btn-danger" type="submit">apagar</button>
                               </form>
 
-                              @endcan
                             </td>
                         </tr>
 

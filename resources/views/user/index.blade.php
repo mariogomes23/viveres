@@ -28,6 +28,7 @@
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Patente</th>
+                            <th>Permissões</th>
                             <th>Tipo de Usuario</th>
                             <th>Opcoes</th>
 
@@ -40,7 +41,26 @@
                             <td>{{$p->name}}</td>
                             <td>{{$p->email}}</td>
                             <td>{{$p->patente}}</td>
-                            <td>{{$p->role}}</td>
+                            <td>
+
+                               <ul>
+                                @forelse ($p->role->permissions as $permission )
+                                <li>
+                                    {{ $permission->nome}}
+                                </li>
+
+                                 @empty
+
+                                 <li>sem permissões</li>
+
+
+                                @endforelse
+
+
+
+                               </ul>
+                            </td>
+                            <td>{{$p->role->nome}}</td>
 
                             <td>
 
@@ -53,7 +73,7 @@
                                 </form>
 
 
-                    
+
 
                             </td>
                         </tr>

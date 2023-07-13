@@ -18,7 +18,8 @@ Route::middleware("auth")->group(function(){
     Route::resource("user",UserController::class);
 
     Route::resource("role",RoleController::class);
-    Route::resource("permission",PermissionController::class);
+    Route::post("/adicionarPermission/{id}",[RoleController::class,"adicionarPermissionInRole"])->name("adicionarPermissionInRole");
+   
 
     Route::get('/', [HomeController::class,"painel"])->name("painel");
 

@@ -49,28 +49,7 @@
     </li>
 
 
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="{{route("permission.index")}}" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
-
-            <span>Permissões</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Permissões</h6>
-
-
-
-          <a class="collapse-item" href="{{route("permission.create")}}">Adicionar Permissão</a>
-          <a class="collapse-item" href="{{route("permission.index")}}">Lista de Permissões</a>
-
-
-
-
-
-            </div>
-        </div>
-    </li>
+  
 
 
 
@@ -115,10 +94,9 @@
         data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Viveres</h6>
-          @can("isFornecedor")
+
           <a class="collapse-item" href="{{route("viveres.create")}}">Adicionar Viveres</a>
 
-          @endcan
 
 
 
@@ -140,10 +118,10 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Tipo de Viveres</h6>
-              @can("isFornecedor")
+
               <a class="collapse-item" href="{{route("tipo.create")}}">Adicionar Tipo de  Viveres</a>
 
-              @endcan
+
                 <a class="collapse-item" href="{{route("tipo.index")}}">Lista de Tipo de  Viveres</a>
 
             </div>

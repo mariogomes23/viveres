@@ -45,6 +45,8 @@ class VivereController extends Controller
     {
         //
 
+        $this->authorize("create_viveres",Vivere::class);
+
         $request->validate([
 
             "quantidade"=>["required","min:0","integer"],

@@ -59,14 +59,14 @@
 
                         <div class="form-group">
                             <label for="role">TIpo de usuário</label>
-                            <select class="form-control @error('role') is-invalid @enderror" id="role" name="role">
+                            <select class="form-control @error('role_id') is-invalid @enderror" id="role" name="role_id">
                                 <option value="">Selecione</option>
                                 @foreach ($roles as $p )
-                                <option value="{{$p}}">{{$p}}</option>
+                                <option value="{{$p->id}}">{{$p->nome}}</option>
                                 @endforeach
 
                             </select>
-                            @error('role')
+                            @error('role_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

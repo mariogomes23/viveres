@@ -41,8 +41,9 @@
                       </div>
                       <div class="list-group-item">
                         <h5 class="mb-1">tipo de Usuario</h5>
-                        <p class="mb-0">{{$user->role}}</p>
+                        <p class="mb-0">{{$user->role->nome}}</p>
                       </div>
+                 
                       <div class="list-group-item">
                         <h5 class="mb-1">Data de Criação</h5>
                         <p class="mb-0">{{$user->created_at}}</p>

@@ -33,7 +33,7 @@
                     </thead>
 
                     <tbody>
-                        @forelse ($tipo as $p )
+                        @forelse ($role as $p )
                         <tr>
                             <td>{{$p->nome}}</td>
 

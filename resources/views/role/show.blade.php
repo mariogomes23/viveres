@@ -23,6 +23,16 @@
                         <h5 class="mb-1">Nome</h5>
                         <p class="mb-0">{{$role->nome}}</p>
                       </div>
+                      <div class="list-group-item">
+                        <h5 class="mb-1">Permissões</h5>
+                       <ul>
+
+                        @foreach ($role->permissions as $permission )
+
+                           <li>{{$permission->nome}}</li>
+                        @endforeach
+                       </ul>
+                      </div>
 
 
 

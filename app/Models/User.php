@@ -45,9 +45,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function roles()
+    public function role()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsTo(Role::class);
     }
 
     public function hasRole(string $nome)
@@ -55,4 +55,6 @@ class User extends Authenticatable
         return $this->roles()->where("nome",$nome)->exists();
 
     }
+
+
 }

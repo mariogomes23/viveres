@@ -84,5 +84,34 @@ class PermissionSeeder extends Seeder
 
             ]
            ]);
+
+
+
+
+           Permission::insert([
+
+            [
+                "nome"=>"create_tipoUsuario"
+
+
+
+            ],
+            [
+                "nome"=>"delete_tipoUsuario"
+
+            ],
+            [
+                "nome"=>"edit_tipoUsuario"
+
+            ],
+            [
+                "nome"=>"index_tipoUsuario"
+
+            ]
+           ]);
+
+
+
+           
     }
 }

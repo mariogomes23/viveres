@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -22,7 +23,7 @@ class UserController extends Controller
     {
         //
 
-        $user = $this->user->orderBy("created_at","desc")->paginate(5);
+        $user = $this->user->with("role")->orderBy("created_at","desc")->paginate(5);
         return View("user.index",compact("user"));
     }
 
@@ -33,13 +34,7 @@ class UserController extends Controller
     {
         //
 
-        $roles =
-         [
-            "fornecedor",
-            "oficial_logistico",
-            "chefe_logistico",
-            "admin"
-         ];
+        $roles = Role::all();
 
          $patentes =
          [
@@ -77,36 +72,22 @@ class UserController extends Controller
             "email"=>["required","string","email"],
             "password"=>["required","min:8"],
             "patente"=>["required"],
-            "role"=>["required"]
+            "role_id"=>["required"]
 
         ]);
 
-        if($request->input("role"))
-        {
-            $this->user->create([
+       $this->user->create([
                 "name"=>$request->name,
-                "email"=>$request->name,
+                "email"=>$request->email,
                 "password"=>Hash::make($request->password),
                 "patente"=>$request->patente,
-                "role"=>$request->role
+                "role_id"=>$request->role_id
 
 
             ]);
 
-        }
-        else
-        {
-            $this->user->create([
-                "name"=>$request->name,
-                "email"=>$request->name,
-                "password"=>Hash::make($request->password),
-                "patente"=>$request->patente,
-                "role"=>"oficial_logistico"
 
 
-            ]);
-
-        }
         return redirect()->route("user.index")->with("message","adicionado com successo");
 
     }
@@ -118,8 +99,9 @@ class UserController extends Controller
     {
 
         //
+        $role = Role::all();
         $user = $this->user->find($id);
-        return View("user.show",compact("user"));
+        return View("user.show",compact("user","role"));
     }
 
     /**
@@ -127,13 +109,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        $roles =
-        [
-           "fornecedor",
-           "oficial_logistico",
-           "chefe_logistico",
-           "admin"
-        ];
+        $role = Role::all();
 
         $patentes =
         [
@@ -157,7 +133,7 @@ class UserController extends Controller
         ];
         //
         $user = $this->user->find($id);
-        return View("user.edit",compact("user","roles","patentes"));
+        return View("user.edit",compact("user","role","patentes"));
     }
 
     /**
@@ -196,4 +172,7 @@ class UserController extends Controller
 
         return redirect()->route("user.index")->with("message","apagado com successo");
     }
+
+
+
 }

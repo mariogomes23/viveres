@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,9 @@ class RoleController extends Controller
     {
         //
 
-        $tipo = $this->role->orderBy("nome","desc")->paginate(5);
+        $role = $this->role->with("permissions")->orderBy("nome","desc")->paginate(5);
+
+
         return View("role.index",compact("role"));
     }
 
@@ -33,7 +36,7 @@ class RoleController extends Controller
     public function create()
     {
         //
-        $role = $this->role->all();
+        $role = $this->role->with("permissions")->get();
         return View("role.create",compact("role"));
     }
 
@@ -65,7 +68,7 @@ class RoleController extends Controller
     public function show(string $id)
     {
         //
-        $role = $this->role->find($id);
+        $role = $this->role->with("permissions")->find($id);
         return View("role.show",compact("role"));
     }
 
@@ -75,8 +78,10 @@ class RoleController extends Controller
     public function edit(string $id)
     {
         //
+        $permissions = Permission::all();
+
         $role = $this->role->find($id);
-        return View("role.edit",compact("role"));
+        return View("role.edit",compact("role","permissions"));
     }
 
     /**
@@ -109,5 +114,15 @@ class RoleController extends Controller
         $this->role->destroy($id);
 
         return redirect()->route("role.index")->with("message","apagado com successo");
+    }
+    public function adicionarPermissionInRole($id,Request $request)
+    {
+        $role = $this->role->find($id);
+
+         $p = $request->input("permissions");
+
+         $role->permissions()->syncWithoutDetaching($p);
+
+        return redirect()->route("role.index")->with("message","permissão adicionada com sucesso");
     }
 }
