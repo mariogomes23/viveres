@@ -33,7 +33,7 @@
                     </thead>
 
                     <tbody>
-                        @forelse ($role as $p )
+                        @forelse ($tipo as $p )
                         <tr>
                             <td>{{$p->nome}}</td>
 
@@ -43,13 +43,12 @@
 
 
 
-                     @can("isAdmin")
+
                      <a class="btn btn-sm btn-warning" href="{{route("tipo.edit",$p->id)}}">Editar</a>
 
-                     @endcan
+
                             <a class="btn btn-sm btn-info" href="{{route("tipo.show",$p->id)}}">Perfil</a>
 
-                           @can("isAdmin")
 
                            <form action="{{route("tipo.destroy",$p->id)}}" method="post" style="display:inline-flex;">
                             @csrf
@@ -59,7 +58,6 @@
 
 
 
-                           @endcan
 
                             </td>
                         </tr>

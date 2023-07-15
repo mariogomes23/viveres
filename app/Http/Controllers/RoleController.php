@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RoleController extends Controller
 {
@@ -24,9 +25,10 @@ class RoleController extends Controller
     {
         //
 
-        $this->authorize("index_tipoUsuario",Role::class);
+       Gate::authorize("lista_roles");
 
-        $role = $this->role->with("permissions")->orderBy("nome","desc")->paginate(5);
+
+        $role = $this->role->with("permissions")->orderBy("id","desc")->paginate(5);
 
 
         return View("role.index",compact("role"));
@@ -38,7 +40,7 @@ class RoleController extends Controller
     public function create()
     {
         //
-        $role = $this->role->with("permissions")->get();
+         $role = $this->role->with("permissions")->get();
         return View("role.create",compact("role"));
     }
 
@@ -49,7 +51,8 @@ class RoleController extends Controller
     {
         //
 
-        $this->authorize("create_tipoUsuario",Role::class);
+        Gate::authorize("adicionar_roles");
+
         $request->validate([
             "nome"=>["required","string"],
 
@@ -70,8 +73,9 @@ class RoleController extends Controller
      */
     public function show(string $id)
     {
-        //
-        $this->authorize("index_tipoUsuario",Role::class);
+
+        Gate::authorize("lista_roles");
+
         $role = $this->role->with("permissions")->find($id);
         return View("role.show",compact("role"));
     }
@@ -93,8 +97,8 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-        $this->authorize("edit_tipoUsuario",Role::class);
+
+        Gate::authorize("atualizar_roles");
         $request->validate([
             "nome"=>["required","string"],
 
@@ -115,22 +119,35 @@ class RoleController extends Controller
     public function destroy(string $id)
     {
         //
-        $this->authorize("delete_tipoUsuario",Role::class);
-
+      Gate::authorize("apagar_roles");
         $this->role->destroy($id);
 
         return redirect()->route("role.index")->with("message","apagado com successo");
     }
 
-    
+
     public function adicionarPermissionInRole($id,Request $request)
     {
         $role = $this->role->find($id);
 
          $p = $request->input("permissions");
 
-         $role->permissions()->syncWithoutDetaching($p);
+         $role->permissions()->detach();
+
+         $role->permissions()->sync($p);
 
         return redirect()->route("role.index")->with("message","permissão adicionada com sucesso");
     }
+
+
+    public function removerPermissionDoRole($id, Request $request)
+{
+    $role = $this->role->find($id);
+
+    $p = $request->input("permissions");
+
+    $role->permissions()->detach($p);
+
+    return redirect()->route("role.index")->with("message", "Permissão removida com sucesso");
+}
 }

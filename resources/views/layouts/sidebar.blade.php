@@ -37,8 +37,12 @@
 
 
 
+
           <a class="collapse-item" href="{{route("user.create")}}">Adicionar Usuario</a>
+
+         
           <a class="collapse-item" href="{{route("user.index")}}">Lista de Usuario</a>
+
 
 
 
@@ -49,7 +53,7 @@
     </li>
 
 
-  
+
 
 
 

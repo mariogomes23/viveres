@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tipo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TipoController extends Controller
 {
@@ -22,9 +23,9 @@ class TipoController extends Controller
     {
         //
 
-        $this->authorize("index_tipoViveres",Tipo::class);
+      Gate::authorize("lista_tipoViveres");
 
-        $tipo = $this->tipo->orderBy("nome","desc")->paginate(5);
+        $tipo = $this->tipo->orderBy("id","desc")->paginate(5);
         return View("tipo.index",compact("tipo"));
     }
 
@@ -45,7 +46,8 @@ class TipoController extends Controller
     {
         //
 
-        $this->authorize("create_tipoViveres",Tipo::class);
+        Gate::authorize("adicionar_tipoViveres");
+
         $request->validate([
             "nome"=>["required","string"],
 
@@ -66,8 +68,7 @@ class TipoController extends Controller
      */
     public function show(string $id)
     {
-        //
-        $this->authorize("index_tipoViveres",Tipo::class);
+        Gate::authorize("lista_tipoViveres");
         $tipo = $this->tipo->find($id);
         return View("tipo.show",compact("tipo"));
     }
@@ -87,8 +88,10 @@ class TipoController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        Gate::authorize("atualizar_tipoViveres");
         //
-        $this->authorize("edit_tipoViveres",Tipo::class);
+
         $request->validate([
             "nome"=>["required","string"],
 
@@ -108,8 +111,7 @@ class TipoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
-        $this->authorize("delete_tipoViveres",Tipo::class);
+        Gate::authorize("apagar_tipoViveres");
 
         $this->tipo->destroy($id);
 

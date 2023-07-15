@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tipo;
 use App\Models\Vivere;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class VivereController extends Controller
 {
@@ -22,18 +23,20 @@ class VivereController extends Controller
     {
         //
 
+              Gate::authorize("lista_viveres");
 
-        $this->authorize("index_viveres",Vivere::class);
-        $viveres = $this->viveres->orderBy("marca","desc")->paginate(5);
+        $viveres = $this->viveres->orderBy("id","desc")->paginate(5);
         return View("viveres.index",compact("viveres"));
     }
 
     /**
      * Show the form for creating a new resource.
      */
+
     public function create()
     {
         //
+
         $tipo = Tipo::all();
         $viveres = $this->viveres->all();
         return View("viveres.create",compact("viveres","tipo"));
@@ -46,7 +49,9 @@ class VivereController extends Controller
     {
         //
 
-        $this->authorize("create_viveres",Vivere::class);
+        Gate::authorize("adicionar_viveres");
+
+
 
         $request->validate([
 
@@ -68,7 +73,9 @@ class VivereController extends Controller
     {
         //
 
-        $this->authorize("index_viveres",Vivere::class);
+        Gate::authorize("lista_viveres");
+
+
         $tipo = Tipo::all();
         $viveres = $this->viveres->find($id);
         return View("viveres.show",compact("viveres"));
@@ -92,7 +99,8 @@ class VivereController extends Controller
     public function update(Request $request,$id)
     {
         //
-        $this->authorize("edit_viveres",Vivere::class);
+
+        Gate::authorize("atualizar_viveres");
         $request->validate([
 
             "quantidade"=>["required","min:0","integer"],
@@ -112,7 +120,7 @@ class VivereController extends Controller
     {
         //
 
-        $this->authorize("delete_viveres",Vivere::class);
+        Gate::authorize("apagar_viveres");
 
         $this->viveres->destroy($id);
 

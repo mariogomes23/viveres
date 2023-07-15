@@ -64,6 +64,13 @@
         <div class="card-body mt-10">
             <div class="table-responsive">
                 <div class="container-fluid">
+                    <form action="{{route("removerPermissionDoRole",$role->id)}}" method="POST">
+                        @csrf
+                        @method("POST")
+
+
+                        <button type="submit" class="btn btn-primary">Remover Permissões</button>
+                    </form>
                     <form action="{{route("adicionarPermissionInRole",$role->id)}}" method="POST">
                         @csrf
                         @method("POST")

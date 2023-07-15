@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -13,7 +14,7 @@ class UserController extends Controller
 
     public function __construct(User $user)
     {
-        $this->user = $user;
+        $this->user= $user;
 
     }
 
@@ -23,9 +24,9 @@ class UserController extends Controller
     {
         //
 
-        $this->authorize("delete_user",User::class);
+ Gate::authorize("lista_usuarios");
 
-        $user = $this->user->with("role")->orderBy("created_at","desc")->paginate(5);
+        $user = $this->user->with("role")->orderBy("id","desc")->paginate(5);
         return View("user.index",compact("user"));
     }
 
@@ -68,7 +69,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        $this->authorize("create_user",User::class);
+        Gate::authorize("adicionar_usuarios");
 
         $request->validate([
             "name"=>["required","string"],
@@ -103,7 +104,8 @@ class UserController extends Controller
 
         //
 
-        $this->authorize("create_user",User::class);
+        Gate::authorize("atualizar_usuarios");
+
         $role = Role::all();
         $user = $this->user->find($id);
         return View("user.show",compact("user","role"));
@@ -147,20 +149,22 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $this->authorize("edit_user",User::class);
+
+      Gate::authorize("atualizar_usuarios");
         $request->validate([
             "name"=>["required","string"],
             "email"=>["required","string","email"],
             "password"=>["required","min:8"],
             "patente"=>["required"],
+            "role_id"=>["required"],
 
         ]);
         $this->user->find($id)->update([
             "name"=>$request->name,
-            "email"=>$request->name,
+            "email"=>$request->email,
             "password"=>Hash::make($request->password),
             "patente"=>$request->patente,
-            "role"=>"oficial_logistico"
+            "role_id"=>$request->role_id
 
 
         ]);
@@ -173,8 +177,7 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
-
-        $this->authorize("delete_user",User::class);
+  Gate::authorize("apagar_usuarios");
         $this->user->destroy($id);
 
         return redirect()->route("user.index")->with("message","apagado com successo");
