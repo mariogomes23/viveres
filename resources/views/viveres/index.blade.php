@@ -45,18 +45,27 @@
                             <td>
 
 
-                    <a class="btn btn-sm btn-warning" href="{{route("viveres.edit",$p->id)}}">Editar</a>
+                  @can("atualizar_viveres")
+                  <a class="btn btn-sm btn-warning" href="{{route("viveres.edit",$p->id)}}">Editar</a>
+
+                  @endcan
 
 
-                              <a class="btn btn-sm btn-info" href="{{route("viveres.show",$p->id)}}">Perfil</a>
+                       @can("lista_viveres")
+                       <a class="btn btn-sm btn-info" href="{{route("viveres.show",$p->id)}}">Perfil</a>
+
+                       @endcan
 
 
+@can("apagar_viveres")
 
-                              <form action="{{route("viveres.destroy",$p->id)}}" method="post" style="display:inline-flex;">
-                                @csrf
-                                  @method("DELETE")
-                                  <button class="btn btn-sm btn-danger" type="submit">apagar</button>
-                              </form>
+<form action="{{route("viveres.destroy",$p->id)}}" method="post" style="display:inline-flex;">
+    @csrf
+      @method("DELETE")
+      <button class="btn btn-sm btn-danger" type="submit">apagar</button>
+  </form>
+
+@endcan
 
                             </td>
                         </tr>

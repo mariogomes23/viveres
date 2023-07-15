@@ -44,18 +44,27 @@
 
 
 
-                     <a class="btn btn-sm btn-warning" href="{{route("role.edit",$p->id)}}">Editar</a>
+                   @can("atualizar_roles")
+                   <a class="btn btn-sm btn-warning" href="{{route("role.edit",$p->id)}}">Editar</a>
+
+                   @endcan
 
 
-                            <a class="btn btn-sm btn-info" href="{{route("role.show",$p->id)}}">Perfil</a>
+                    @can("lista_roles")
+                    <a class="btn btn-sm btn-info" href="{{route("role.show",$p->id)}}">Perfil</a>
+
+                    @endcan
 
 
+@can("apagar_roles")
 
-                           <form action="{{route("role.destroy",$p->id)}}" method="post" style="display:inline-flex;">
-                            @csrf
-                              @method("DELETE")
-                              <button class="btn btn-sm btn-danger" type="submit">apagar</button>
-                          </form>
+<form action="{{route("role.destroy",$p->id)}}" method="post" style="display:inline-flex;">
+    @csrf
+      @method("DELETE")
+      <button class="btn btn-sm btn-danger" type="submit">apagar</button>
+  </form>
+
+@endcan
 
 
 

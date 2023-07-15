@@ -64,14 +64,23 @@
 
                             <td>
 
-                                <a class="btn btn-sm btn-warning" href="{{route("user.edit",$p->id)}}">Editar</a>
-                                <a class="btn btn-sm btn-info" href="{{route("user.show",$p->id)}}">Perfil</a>
-                                <form action="{{route("user.destroy",$p->id)}}" method="post" style="display:inline-flex;">
-                                  @csrf
-                                    @method("DELETE")
-                                    <button class="btn btn-sm btn-danger" type="submit">apagar</button>
-                                </form>
+                           @can("atualizar_usuarios")
+                           <a class="btn btn-sm btn-warning" href="{{route("user.edit",$p->id)}}">Editar</a>
 
+                           @endcan
+                             @can("lista_usuarios")
+                             <a class="btn btn-sm btn-info" href="{{route("user.show",$p->id)}}">Perfil</a>
+
+                             @endcan
+                            @can("apagar_usuarios")
+                            <form action="{{route("user.destroy",$p->id)}}" method="post" style="display:inline-flex;">
+                                @csrf
+                                  @method("DELETE")
+                                  <button class="btn btn-sm btn-danger" type="submit">apagar</button>
+                              </form>
+
+
+                            @endcan
 
 
 

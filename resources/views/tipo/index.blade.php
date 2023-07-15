@@ -44,18 +44,27 @@
 
 
 
-                     <a class="btn btn-sm btn-warning" href="{{route("tipo.edit",$p->id)}}">Editar</a>
+                   @can("atualizar_tipoViveres")
+                   <a class="btn btn-sm btn-warning" href="{{route("tipo.edit",$p->id)}}">Editar</a>
+
+                   @endcan
 
 
-                            <a class="btn btn-sm btn-info" href="{{route("tipo.show",$p->id)}}">Perfil</a>
+                          @can("lista_tipoViveres")
+                          <a class="btn btn-sm btn-info" href="{{route("tipo.show",$p->id)}}">Perfil</a>
+
+                          @endcan
 
 
-                           <form action="{{route("tipo.destroy",$p->id)}}" method="post" style="display:inline-flex;">
-                            @csrf
-                              @method("DELETE")
-                              <button class="btn btn-sm btn-danger" type="submit">apagar</button>
-                          </form>
+                      @can("apagar_tipoViveres")
+                      <form action="{{route("tipo.destroy",$p->id)}}" method="post" style="display:inline-flex;">
+                        @csrf
+                          @method("DELETE")
+                          <button class="btn btn-sm btn-danger" type="submit">apagar</button>
+                      </form>
 
+
+                      @endcan
 
 
 

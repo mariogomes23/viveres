@@ -38,11 +38,17 @@
 
 
 
-          <a class="collapse-item" href="{{route("user.create")}}">Adicionar Usuario</a>
+ @can("adicionar_usuarios")
+ <a class="collapse-item" href="{{route("user.create")}}">Adicionar Usuario</a>
 
-         
-          <a class="collapse-item" href="{{route("user.index")}}">Lista de Usuario</a>
+ @endcan
 
+
+@can("lista_usuarios")
+<a class="collapse-item" href="{{route("user.index")}}">Lista de Usuario</a>
+
+
+@endcan
 
 
 
@@ -69,8 +75,16 @@
 
 
 
-          <a class="collapse-item" href="{{route("role.create")}}">Adicionar Tipo de Usuario</a>
-          <a class="collapse-item" href="{{route("role.index")}}">Lista de Tipo de  Usuario</a>
+       @can("adicionar_roles")
+       <a class="collapse-item" href="{{route("role.create")}}">Adicionar Tipo de Usuario</a>
+
+       @endcan
+
+
+       @can("lista_roles")
+       <a class="collapse-item" href="{{route("role.index")}}">Lista de Tipo de  Usuario</a>
+
+       @endcan
 
 
 
@@ -99,12 +113,20 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Viveres</h6>
 
-          <a class="collapse-item" href="{{route("viveres.create")}}">Adicionar Viveres</a>
+      @can("lista_viveres")
+      <a class="collapse-item" href="{{route("viveres.index")}}">Lista de Viveres</a>
+
+      @endcan
+
+      @can("adicionar_viveres")
+      <a class="collapse-item" href="{{route("viveres.create")}}">Adicionar Viveres</a>
+
+      @endcan
 
 
 
 
-            <a class="collapse-item" href="{{route("viveres.index")}}">Lista de Viveres</a>
+
 
         </div>
     </div>
@@ -123,10 +145,18 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Tipo de Viveres</h6>
 
-              <a class="collapse-item" href="{{route("tipo.create")}}">Adicionar Tipo de  Viveres</a>
+           @can("adicionar_tipoViveres")
+           <a class="collapse-item" href="{{route("tipo.create")}}">Adicionar Tipo de  Viveres</a>
 
+           @endcan
+
+
+
+                @can("lista_tipoViveres")
 
                 <a class="collapse-item" href="{{route("tipo.index")}}">Lista de Tipo de  Viveres</a>
+
+                @endcan
 
             </div>
         </div>
